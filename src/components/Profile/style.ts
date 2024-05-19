@@ -17,19 +17,38 @@ export const ProfileContentInformation = styled.article`
     flex-direction: column;
     gap: 2rem;
     div:first-of-type {
+
             h1 {
                 font-size: 24px;
                 font-weight: bold;
             }
-            
-            a {
-                text-decoration: none;
-                color: ${props => props.theme.blue};
-                font-size: 12px;
-                font-weight: bold;
+
+            div {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                border-bottom: 1px solid transparent;
+                
+                svg {
+                    color: ${props => props.theme.blue};
+                }
+
+                a {
+                    text-decoration: none;
+                    color: ${props => props.theme.blue};
+                    font-size: 12px;
+                    font-weight: bold;
+                }
+
+                padding-bottom: 5px;
+
+                &:hover {
+                  border-bottom-color: ${props => props.theme.blue};
+                  transition: 0.3s;
+                }
             }
 
-            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -43,6 +62,11 @@ export const ProfileContentInformation = styled.article`
             display: flex;
             gap: 2rem;
     }
+`
 
+export const InformationContainer = styled.article`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 `
 

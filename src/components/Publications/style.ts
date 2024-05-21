@@ -8,7 +8,19 @@ export const PublicationsContainer = styled.section`
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        h2 {
+            color: ${props => props.theme['base-subtitle']};
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        span {
+            color: ${props => props.theme['base-span']};
+            font-size: 14px;
+         }
     }
+
 `
 
 export const SearchForm = styled.form`

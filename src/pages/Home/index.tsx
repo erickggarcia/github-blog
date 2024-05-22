@@ -1,5 +1,5 @@
-import { Profile } from "../../components/Profile";
-import { Publications } from "../../components/Publications";
+import { Profile } from "../Home/components/Profile";
+import { Publications } from "../Home/components/Publications";
 import { HomeContainer, HomeContent } from "./style";
 
 export function Home() {

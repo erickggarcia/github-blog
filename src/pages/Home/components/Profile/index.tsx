@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import avatar from '../../assets/avatar.png'
+import avatar from '../../../../assets/avatar.png'
 import { InformationContainer, ProfileContainer, ProfileContentInformation } from './style'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'

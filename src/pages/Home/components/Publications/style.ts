@@ -46,3 +46,23 @@ export const SearchForm = styled.form`
     }
 
 `
+
+export const ArticlesContainer = styled.section`
+    margin: 2rem 0 4rem 0;
+    display: grid;
+    grid-gap: 1.75rem;
+    grid-template-columns: repeat(2, 1fr);
+
+    article {
+        background: ${props => props.theme['base-post']};
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        border-radius: 10px;
+
+        p {
+            color: ${props => props.theme['base-text']};
+        }
+    }
+`

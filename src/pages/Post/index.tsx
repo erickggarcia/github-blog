@@ -1,11 +1,13 @@
-import { Article } from "./components/articleSummary";
+import { ArticleContent } from "./components/articleContent";
+import { ArticleSummary } from "./components/articleSummary";
 import { PostContainer, PostContent } from "./styles";
 
 export function Post() {
     return (
         <PostContainer>
             <PostContent>
-                <Article />
+                <ArticleSummary />
+                <ArticleContent/>
             </PostContent>
         </PostContainer>
     )

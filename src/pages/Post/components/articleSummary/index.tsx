@@ -6,7 +6,7 @@ import { faCalendarDay, faChevronLeft } from "@fortawesome/free-solid-svg-icons"
 import { faComment } from "@fortawesome/free-regular-svg-icons";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons/faArrowUpRightFromSquare";
 
-export function Article() {
+export function ArticleSummary() {
     return (
         <ArticleContainer>
             <ArticleContentInformation>

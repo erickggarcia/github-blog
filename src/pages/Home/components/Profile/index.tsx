@@ -19,7 +19,7 @@ export function Profile() {
   console.log(profile)
 
   if (!profile) {
-    return <div>Loading...</div> // Ou qualquer outra indicação de carregamento
+    return <div>Loading...</div>
   }
 
   return (

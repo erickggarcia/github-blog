@@ -1,41 +1,56 @@
 import { Link } from 'react-router-dom'
-import avatar from '../../../../assets/avatar.png'
-import { InformationContainer, ProfileContainer, ProfileContentInformation } from './style'
+import {
+  InformationContainer,
+  ProfileContainer,
+  ProfileContentInformation,
+} from './style'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faBuilding } from '@fortawesome/free-regular-svg-icons'
-import { faArrowUpRightFromSquare, faUserGroup } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowUpRightFromSquare,
+  faUserGroup,
+} from '@fortawesome/free-solid-svg-icons'
+import { useContext } from 'react'
+import { BlogContext } from '../../../../contexts/BlogContext'
 
 export function Profile() {
-    return (
-        <ProfileContainer>
-            <img src={avatar} alt="" />
-            <ProfileContentInformation>
-                <div>
-                    <h1>Cameron Williamson</h1>
-                    <div>
-                        <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-                        <Link to="#">GITHUB</Link>
-                    </div>
-                </div>
-                <p>Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat pulvinar vel mass.</p>
-                <div>
-                    <InformationContainer>
-                        <FontAwesomeIcon icon={faGithub} />
-                        <span>CameronWll</span>
-                    </InformationContainer>
+  const { profile } = useContext(BlogContext)
+  console.log(profile)
 
-                    <InformationContainer>
-                        <FontAwesomeIcon icon={faBuilding} />
-                        <span>Rocketseat</span>
-                    </InformationContainer>
+  if (!profile) {
+    return <div>Loading...</div> // Ou qualquer outra indicação de carregamento
+  }
 
-                    <InformationContainer>
-                        <FontAwesomeIcon icon={faUserGroup} />
-                        <span>32 seguidores</span>
-                    </InformationContainer>
-                </div>
-            </ProfileContentInformation>
-        </ProfileContainer>
-    )
+  return (
+    <ProfileContainer>
+      <img className="avatar" src={profile.avatar_url} alt="" />
+      <ProfileContentInformation>
+        <div className="profileMainInformation">
+          <h1>{profile.name}</h1>
+          <div>
+            <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            <Link to={profile.html_url}>GITHUB</Link>
+          </div>
+        </div>
+        <p>{profile.bio}</p>
+        <div className="summary">
+          <InformationContainer>
+            <FontAwesomeIcon icon={faGithub} />
+            <span>{profile.login}</span>
+          </InformationContainer>
+
+          <InformationContainer>
+            <FontAwesomeIcon icon={faBuilding} />
+            <span>{profile.company}</span>
+          </InformationContainer>
+
+          <InformationContainer>
+            <FontAwesomeIcon icon={faUserGroup} />
+            <span>{profile.followers} seguidores</span>
+          </InformationContainer>
+        </div>
+      </ProfileContentInformation>
+    </ProfileContainer>
+  )
 }

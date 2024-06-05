@@ -1,12 +1,12 @@
-import { Article } from "./components/articleSummary";
-import { PostContainer, PostContent } from "./styles";
+import { Article } from './components/articleSummary'
+import { PostContainer, PostContent } from './styles'
 
 export function Post() {
-    return (
-        <PostContainer>
-            <PostContent>
-                <Article />
-            </PostContent>
-        </PostContainer>
-    )
+  return (
+    <PostContainer>
+      <PostContent>
+        <Article />
+      </PostContent>
+    </PostContainer>
+  )
 }

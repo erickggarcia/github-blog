@@ -57,6 +57,17 @@ export const ArticleContentInformation = styled.article`
 
   .markdown {
     blockquote {
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+      gap: 0.5rem;
+      pre {
+        code {
+          padding: 10px 0;
+          display: block;
+          overflow-x: scroll;
+        }
+      }
       blockquote {
         display: flex;
         flex-direction: column;

@@ -38,12 +38,14 @@ export function Profile() {
             <FontAwesomeIcon icon={faGithub} />
             <span>{profile.login}</span>
           </InformationContainer>
-
-          <InformationContainer>
-            <FontAwesomeIcon icon={faBuilding} />
-            <span>{profile.company}</span>
-          </InformationContainer>
-
+          {
+          profile.company ? 
+            <InformationContainer>
+              <FontAwesomeIcon icon={faBuilding} />
+              <span>{profile.company}</span>
+            </InformationContainer>
+            : ''
+          }
           <InformationContainer>
             <FontAwesomeIcon icon={faUserGroup} />
             <span>{profile.followers} seguidores</span>

@@ -14,7 +14,6 @@ import Markdown from 'react-markdown'
 import { api } from '../../../../lib/axios'
 import {formatDistanceToNow } from 'date-fns/formatDistanceToNow'
 import { ptBR } from 'date-fns/locale/pt-BR'
-import { BlogContext } from '../../../../contexts/BlogContext'
 
 interface ArticleProps {
   title: string

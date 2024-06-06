@@ -58,8 +58,9 @@ export const ArticlesContainer = styled.section`
     flex-direction: column;
     gap: 1rem;
     border-radius: 10px;
+    cursor: pointer;
 
-    p {
+    .description {
       color: ${(props) => props.theme['base-text']};
     }
   }

@@ -16,7 +16,6 @@ import { BlogContext } from '../../../../contexts/BlogContext'
 
 export function Profile() {
   const { profile } = useContext(BlogContext)
-  console.log(profile)
 
   if (!profile) {
     return <div>Loading...</div>

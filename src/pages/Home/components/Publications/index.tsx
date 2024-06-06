@@ -1,72 +1,92 @@
+import { useEffect, useState } from 'react'
 import { ArticlesContainer, PublicationsContainer, SearchForm } from './style'
+import Markdown from 'react-markdown'
+import {formatDistanceToNow } from 'date-fns/formatDistanceToNow'
+import { ptBR } from 'date-fns/locale/pt-BR'
+import { api } from '../../../../lib/axios'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
-const MOCK_PUBLICATIONS = [
-  {
-    id: 1,
-    title: 'JavaScript data types and data structures',
-    date: 'Há 1 dia',
-    description:
-      'Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in ',
-  },
-  {
-    id: 2,
-    title: 'JavaScript data types and data structures',
-    date: 'Há 1 dia',
-    description:
-      'Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in ',
-  },
-  {
-    id: 3,
-    title: 'JavaScript data types and data structures',
-    date: 'Há 1 dia',
-    description:
-      'Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in ',
-  },
-  {
-    id: 4,
-    title: 'JavaScript data types and data structures',
-    date: 'Há 1 dia',
-    description:
-      'Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in ',
-  },
-  {
-    id: 5,
-    title: 'JavaScript data types and data structures',
-    date: 'Há 1 dia',
-    description:
-      'Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in ',
-  },
-  {
-    id: 6,
-    title: 'JavaScript data types and data structures',
-    date: 'Há 1 dia',
-    description:
-      'Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in ',
-  },
-]
+interface ArticlesProps {
+  incomplete_results: boolean
+  items: any[]
+  total_count: number
+}
 
 export function Publications() {
+  const [queryParams, setQueryParams] = useState<string>('')
+  const [articles, setArticles] = useState<ArticlesProps>()
+  const navigate = useNavigate()
+
+  function handleSearchArticles(data: any) {
+    setQueryParams(data.search)
+  }
+
+  const {register, handleSubmit} = useForm()
+
+  async function fetchArticles() {
+    try {
+      const response = await api.get(`/search/issues?q=${queryParams} repo:erickggarcia/github-blog`);
+      const data = response.data
+      setArticles(data)
+    } catch (error) {
+      console.error('Erro ao buscar artigos:', error);
+    }
+  }
+
+  useEffect(() => {
+    fetchArticles()
+    console.log(queryParams)
+  }, [queryParams])
+
+  function truncateText(text: string, wordLimit: number): string {
+    if (!text) {
+      return ''
+    }
+    const words = text.split(' ');
+    if (words.length > wordLimit) {
+      return words.slice(0, wordLimit).join(' ') + '...'
+    }
+
+    return text
+  }
+
   return (
     <PublicationsContainer>
       <div>
         <h2>Publicações</h2>
-        <span>6 publicações</span>
+        <span>{articles?.total_count} publicações</span>
       </div>
 
-      <SearchForm>
-        <input type="text" placeholder="Buscar conteúdo" />
+      <SearchForm onSubmit={handleSubmit(handleSearchArticles)}>
+        <input
+          type="text"
+          placeholder="Buscar conteúdo"
+          {...register('search')}
+        />
       </SearchForm>
 
       <ArticlesContainer>
-        {MOCK_PUBLICATIONS.map((article) => (
-          <article key={article.id}>
-            <div>
-              <h3>{article.title}</h3>
-              <span>{article.date}</span>
-            </div>
-            <p>{article.description}</p>
-          </article>
-        ))}
+        {articles &&
+          articles.items.map((article, index) => (
+            <article key={index}
+             id={article.number}
+             onClick={() => navigate(`/post/${article.number}`)}
+            >
+              <div>
+                <h3>{article.title}</h3>
+                <span>{formatDistanceToNow(new Date(article.updated_at), {
+                  addSuffix: true,
+                  locale: ptBR
+                }) }</span>
+              </div>
+              <div className='description'>
+                <Markdown>
+                  {truncateText(article.body, 30)}
+                </Markdown>
+              </div>
+            </article>
+          ))}
       </ArticlesContainer>
     </PublicationsContainer>
   )

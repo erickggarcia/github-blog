@@ -42,7 +42,6 @@ export function Article() {
     try {
       const response = await api.get(`/repos/erickggarcia/github-blog/issues/${id}`)
       const data = response.data
-      console.log(data)
       setArticle(data)
     } catch (error) {
       console.error('Erro ao carregar artigo:', error);
@@ -51,7 +50,7 @@ export function Article() {
 
   useEffect(() => {
     fetchArticle()
-  }, [])
+  }, [id])
 
   return (
     <ArticleContainer>
